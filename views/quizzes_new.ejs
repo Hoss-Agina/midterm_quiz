@@ -23,7 +23,7 @@
 
     <main style="margin: 1em;">
       <h3>Create Quizzel</h3>
-      <form class="form" action="/quizzes" method="POST">
+      <form class="form" action="/quizzes/new" method="POST">
         <div class="form-group">
           <label for="title">Quizzel Name</label>
           <input
@@ -72,8 +72,10 @@
             style="width: 300px; margin: 1em"
           />
           <button type="submit" class="btn btn-primary">Submit</button>
+
         </div>
       </form>
+      <button type = "submit" class="btn btn-primary" id="add-question">Add Question</button>
     </main>
     <!-- Bootstrap JS -->
     <!-- <script

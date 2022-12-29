@@ -9,8 +9,11 @@ const express = require('express');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
-  res.render('quizzes_index');
+  res.render('users');
 });
+
+
+
 
 
 module.exports = router;
