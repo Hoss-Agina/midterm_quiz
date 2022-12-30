@@ -9,8 +9,11 @@ const dbParams = {
   database: process.env.DB_NAME
 };
 
+
 const db = new Pool(dbParams);
 
 db.connect();
+
+
 
 module.exports = db;
