@@ -1,16 +1,53 @@
 const db = require('../connection');
 
-const addQuiz = function(quiz) {
-  let values = [quiz.user_ID, quiz.title, quiz.isListed];
+const addQuiz = function(quizArr) {
 
   const quizQuery =
-    `INSERT INTO quizzes(user_ID, title, isListed)
-  VALUES($1, $2, $3)
-  RETURNING *;`;
+    `INSERT INTO quizzes (title) VALUES ($1) RETURNING *;` ;
 
   return db
 
-    .query(quizQuery, values)
+    .query(quizQuery, quizArr)
+    .then((result) => {
+      console.log("result.rows[0].id",result.rows[0].id);
+      // console.log('quizQuery:', quizQuery);
+
+      return result.rows[0].id;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+const addQuestion = function(questionsArr) {
+  // let values = [quiz.rows[0].id, quiz.title];
+
+  const quizQuery =
+    `INSERT INTO questions (quiz_ID, title) VALUES ($1, $2) RETURNING *;`;
+
+  return db
+
+    .query(quizQuery, questionsArr)
+    .then((result) => {
+      console.log('results from addQuestion func:', result.rows[0].id);
+      // console.log('quizQuery:', quizQuery);
+
+      return result.rows[0].id;
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+
+const addAnswer = function(quiz) {
+
+  const quizQuery =
+    `INSERT INTO answers (question_id, answer) VALUES ($1, $2) RETURNING *;`;
+
+  return db
+
+    .query(quizQuery, quiz)
     .then((result) => {
       console.log(result.rows);
       console.log('quizQuery:', quizQuery);
@@ -22,48 +59,10 @@ const addQuiz = function(quiz) {
     });
 };
 
-const addQuestions = function(quiz) {
-  let values = [quiz.quiz_ID, quiz.title];
+// const getQuizId = () => {
+//   return db
 
-  const quizQuery =
-    `INSERT INTO quizzes(user_ID, title)
-  VALUES($1, $2)
-  RETURNING *;`;
+//     .query('SELECT id from quizzes WHERE ')
+// }
 
-  return db
-
-    .query(quizQuery, values)
-    .then((result) => {
-      console.log(result.rows);
-      console.log('quizQuery:', quizQuery);
-
-      return result.rows;
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
-
-const addAnswers = function(quiz) {
-  let values = [quiz.question_ID, quiz.answer, quiz.isCorrect];
-
-  const quizQuery =
-    `INSERT INTO quizzes(question_ID, title, isCorrect)
-  VALUES($1, $2, $3)
-  RETURNING *;`;
-
-  return db
-
-    .query(quizQuery, values)
-    .then((result) => {
-      console.log(result.rows);
-      console.log('quizQuery:', quizQuery);
-
-      return result.rows;
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
-
-module.exports = { addQuiz };
+module.exports = { addQuiz, addQuestion, addAnswer };
