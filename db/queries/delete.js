@@ -1,16 +1,16 @@
 const db = require('../connection');
 
-const getQuizzes = function() {
+const deleteQuiz = function(id) {
 
   const quizQuery =
-    `SELECT * FROM quizzes`;
+    `DELETE FROM quizzes WHERE id = ${id}`;
 
   return db
 
     .query(quizQuery)
     .then((result) => {
-      console.log("result rows from getQuizzes", result.rows);
-      return result.rows;
+      console.log("result rows from delete quiz", result.rows);
+      return;
     })
     .catch((err) => {
       console.log(err.message);
@@ -20,4 +20,4 @@ const getQuizzes = function() {
 
 
 
-module.exports = { getQuizzes };
+module.exports = { deleteQuiz };

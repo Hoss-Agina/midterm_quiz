@@ -3,6 +3,8 @@ const express = require('express');
 const db = require('../db/connection');
 const { addQuiz, addQuestion, addAnswer } = require('../db/queries/quizzes_new');
 const { getQuizzes } = require('../db/queries/index');
+const { deleteQuiz } = require('../db/queries/delete');
+const { editQuiz } = require('../db/queries/edit');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -53,8 +55,8 @@ router.post('/new', (req, res) => {
     answersArray.push(req.body[`wrong-answer-${questionNumber}-2`]);
     answersArray.push(req.body[`wrong-answer-${questionNumber}-3`]);
     answersArray.push(req.body[`wrong-answer-${questionNumber}-4`]);
-    console.log('answersArray', answersArray);
-    console.log('questionNumber', questionNumber);
+    // console.log('answersArray', answersArray);
+    // console.log('questionNumber', questionNumber);
     return answersArray;
   }
   quizArr.push(req.body.title)
@@ -77,7 +79,7 @@ router.post('/new', (req, res) => {
   const addQuestions = function (questionsArr, quiz_ID) {
     let arrOfPromises = [];
     for (let q = 0; q < questionsArr.length; q++) {
-      let promise = addQuestion([quiz_ID, questionsArr[q]]);
+      let promise = addQuestion([quiz_ID, questionsArr[q], q+1]);
       arrOfPromises.push(promise);
       promise.then((question_ID) => addAnswers(question_ID, answersArr(q+1)))
     }
@@ -91,7 +93,7 @@ router.post('/new', (req, res) => {
       if (q === 0) {
         boolean = true;
       }
-      let promise = addAnswer([question_ID, answersArr[q], boolean]);
+      let promise = addAnswer([question_ID, answersArr[q], boolean, q+1]);
       boolean = false;
       arrOfPromises.push(promise);
     }
@@ -102,7 +104,7 @@ router.post('/new', (req, res) => {
     console.log("quizID", quiz_ID);
     addQuestions(questionsArr, quiz_ID)
       .then(() => {
-        res.redirect(`/quiz/${quiz_ID}`)
+        res.redirect(`/quizzes/`)
       })
       .catch((error) => {
         res.send(error)
@@ -110,5 +112,14 @@ router.post('/new', (req, res) => {
   })
 })
 
+router.post('/:id/delete', (req, res) => {
+  deleteQuiz(req.params.id);
+  res.redirect(`/quizzes/`)
+});
+
+router.get('/:id/edit', (req, res) => {
+  const templateVars = {quizId: req.params.id}
+  res.render('quizzes_edit', templateVars);
+});
 
   module.exports = router;

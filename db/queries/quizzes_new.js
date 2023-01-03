@@ -23,7 +23,7 @@ const addQuestion = function(questionsArr) {
   // let values = [quiz.rows[0].id, quiz.title];
 
   const quizQuery =
-    `INSERT INTO questions (quiz_ID, title) VALUES ($1, $2) RETURNING *;`;
+    `INSERT INTO questions (quiz_ID, title, question_number) VALUES ($1, $2, $3) RETURNING *;`;
 
   return db
 
@@ -43,7 +43,7 @@ const addQuestion = function(questionsArr) {
 const addAnswer = function(quiz) {
 
     const quizQuery =
-    `INSERT INTO answers (question_id, answer, isCorrect) VALUES ($1, $2, $3) RETURNING *;`;
+    `INSERT INTO answers (question_id, answer, isCorrect, answer_number) VALUES ($1, $2, $3, $4) RETURNING *;`;
 
   return db
 

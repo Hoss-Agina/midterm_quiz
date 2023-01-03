@@ -17,6 +17,7 @@ CREATE TABLE quizzes (
 
 CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
+  question_number INTEGER,
   quiz_ID INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL
 );
@@ -25,7 +26,8 @@ CREATE TABLE answers (
   id SERIAL PRIMARY KEY NOT NULL,
   question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
   answer VARCHAR(255) NOT NULL,
-  isCorrect BOOLEAN NOT NULL
+  isCorrect BOOLEAN NOT NULL,
+  answer_number INTEGER
 );
 
 CREATE TABLE each_user_answers (
