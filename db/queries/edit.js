@@ -1,6 +1,6 @@
 const db = require('../connection');
 
-const editQuiz = function(id) {
+const editPlayQuiz = function(id) {
 
   const quizQuery =
     `SELECT quizzes.title AS quizzes_title, questions.title, answers.answer, questions.id AS question_id, answers.id AS answer_id, answers.answer_number AS answer_number, questions.question_number FROM quizzes
@@ -44,4 +44,4 @@ const getNumOfQuestions = () => {
 
 
 
-module.exports = { editQuiz };
+module.exports = { editPlayQuiz };

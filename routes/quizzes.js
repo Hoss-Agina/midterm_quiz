@@ -4,7 +4,7 @@ const db = require('../db/connection');
 const { addQuiz, addQuestion, addAnswer } = require('../db/queries/quizzes_new');
 const { getQuizzes } = require('../db/queries/index');
 const { deleteQuiz } = require('../db/queries/delete');
-const { editQuiz } = require('../db/queries/edit');
+const { editPlayQuiz } = require('../db/queries/edit');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -14,6 +14,19 @@ router.get('/', (req, res) => {
     const templateVars = { quizzes };
     console.log("quizzes", quizzes);
     res.render('quizzes_index', templateVars);
+  })
+  .catch((error) => {console.log(error)})
+
+});
+
+
+router.get('/:id', (req, res) => {
+  const templateVars = {quizId: req.params.id}
+  editPlayQuiz()
+
+  .then((quizzes) => {
+    console.log("quizzes", quizzes);
+    res.render('quizzes_play', templateVars);
   })
   .catch((error) => {console.log(error)})
 
