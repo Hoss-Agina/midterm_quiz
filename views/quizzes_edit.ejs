@@ -25,10 +25,11 @@
   <body>
     <%- include('partials/_header') %>
 
+
     <main style="margin: 1em;">
       <h3>Edit Quizzel</h3>
       <div id="error-display"></div>
-      <form class="form" action="/quizzes/new" method="POST">
+      <form class="form" action="/quizzes/<%= quizId %>/edit" method="POST">
         <div class="form-group" id="questionCont">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

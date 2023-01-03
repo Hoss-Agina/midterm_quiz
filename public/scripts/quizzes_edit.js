@@ -92,8 +92,62 @@ $(() => {
             </div>
     `);
     }
+    $('#add-question').on('click', () => {
 
+      questionsCounter += 1;
+      $('#questionCont').append(`
+      <div id="question${questionsCounter}">
+        <label for="question1">Question ${questionsCounter}</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="question-${questionsCounter}"
+                  style="width: 300px; margin: 1em"
+                />
+                <label for="answer1">Answer 1</label>
+                <input
+                  class="form-control"
+                  placeholder="Insert Correct Answer"
+                  type="text"
+                  name="correct-answer-${questionsCounter}"
+                  style="width: 300px; margin: 1em"
+                />
+                <label for="answer2">Answer 2</label>
+                <input
+                  class="form-control"
+                  placeholder="Insert Wrong Answer"
+                  type="text"
+                  name="wrong-answer-${questionsCounter}-2"
+                  style="width: 300px; margin: 1em"
+                />
+                <label for="answer3">Answer 3</label>
+                <input
+                  class="form-control"
+                  placeholder="Insert Wrong Answer"
+                  type="text"
+                  name="wrong-answer-${questionsCounter}-3"
+                  style="width: 300px; margin: 1em"
+                />
+                <label for="answer4">Answer 4</label>
+                <input
+                  class="form-control"
+                  placeholder="Insert Wrong Answer"
+                  type="text"
+                  name="wrong-answer-${questionsCounter}-4"
+                  style="width: 300px; margin: 1em"
+                />
+                <hr>
+              </div>
+      `);
+    });
 
-
+    $('#remove-question').on('click', () => {
+      if (questionsCounter === 1) {
+        return;
+      } else {
+        $(`#question${questionsCounter}`).remove();
+        questionsCounter -= 1;
+      }
+    });
   })
   });
