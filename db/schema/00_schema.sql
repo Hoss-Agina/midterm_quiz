@@ -25,7 +25,7 @@ CREATE TABLE answers (
   id SERIAL PRIMARY KEY NOT NULL,
   question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
   answer VARCHAR(255) NOT NULL,
-  isCorrect BOOLEAN NOT NULL DEFAULT TRUE
+  isCorrect BOOLEAN NOT NULL
 );
 
 CREATE TABLE each_user_answers (

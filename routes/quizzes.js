@@ -2,10 +2,19 @@ const express = require('express');
 // const { Database } = require('sqlite3');
 const db = require('../db/connection');
 const { addQuiz, addQuestion, addAnswer } = require('../db/queries/quizzes_new');
+const { getQuizzes } = require('../db/queries/index');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.render('quizzes_index');
+  getQuizzes()
+  .then((quizzes) => {
+    // console.log("arrOfObjs:", arrOfObjs)
+    const templateVars = { quizzes };
+    console.log("templateVars", templateVars);
+    res.render('quizzes_index', templateVars);
+  })
+  .catch((error) => {console.log(error)})
+
 });
 
 router.get('/new', (req, res) => {
@@ -77,8 +86,13 @@ router.post('/new', (req, res) => {
 
   const addAnswers = function (question_ID, answersArr) {
     let arrOfPromises = [];
+    let boolean = false;
     for (let q = 0; q < answersArr.length; q++) {
-      let promise = addAnswer([question_ID, answersArr[q]]);
+      if (q === 0) {
+        boolean = true;
+      }
+      let promise = addAnswer([question_ID, answersArr[q], boolean]);
+      boolean = false;
       arrOfPromises.push(promise);
     }
     return Promise.all(arrOfPromises);
@@ -94,7 +108,6 @@ router.post('/new', (req, res) => {
         res.send(error)
       })
   })
-
 })
 
 

@@ -42,8 +42,8 @@ const addQuestion = function(questionsArr) {
 
 const addAnswer = function(quiz) {
 
-  const quizQuery =
-    `INSERT INTO answers (question_id, answer) VALUES ($1, $2) RETURNING *;`;
+    const quizQuery =
+    `INSERT INTO answers (question_id, answer, isCorrect) VALUES ($1, $2, $3) RETURNING *;`;
 
   return db
 
