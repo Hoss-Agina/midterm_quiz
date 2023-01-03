@@ -3,7 +3,7 @@ const db = require('../connection');
 const editQuiz = function(id) {
 
   const quizQuery =
-    `SELECT quizzes.title, questions.title, answers.answer, questions.id AS question_id, answers.id AS answer_id FROM quizzes
+    `SELECT quizzes.title AS quizzes_title, questions.title, answers.answer, questions.id AS question_id, answers.id AS answer_id, answers.answer_number AS answer_number, questions.question_number FROM quizzes
     JOIN questions ON quizzes.id = questions.quiz_ID
     JOIN answers ON questions.id = answers.question_id
     WHERE quizzes.id = ${id}
@@ -15,10 +15,13 @@ const editQuiz = function(id) {
     .query(quizQuery)
     .then((result) => {
       // console.log("result rows from edit quiz", result.rows);
+      console.log('quizzes', result);
       const questions = {};
       result.rows.forEach((answer) => {
+
         if (!questions[answer.question_id]) {
           questions[answer.question_id] = {
+            quiz_title: answer.quizzes_title,
             title: answer.title,
             id: answer.question_id,
             answers: []

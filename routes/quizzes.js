@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   .then((quizzes) => {
     // console.log("arrOfObjs:", arrOfObjs)
     const templateVars = { quizzes };
-    console.log("templateVars", templateVars);
+    console.log("quizzes", quizzes);
     res.render('quizzes_index', templateVars);
   })
   .catch((error) => {console.log(error)})
