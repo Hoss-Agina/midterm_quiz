@@ -79,6 +79,7 @@ $(() => {
     }
 
       if(event.target.textContent === data['questions'][`${counter}`]['answers']['0']['answer']){
+        
         console.log('thats correct');
       }
       else{console.log('wrong answer')}
@@ -92,5 +93,6 @@ $(() => {
       // addUserAnswer()
 
   })
+
   })
 })

@@ -64,10 +64,7 @@ router.post('/new', (req, res) => {
   }
   quizArr.push(req.body.title)
 
-
-
   console.log('answers Array :', answersArr);
-
 
 
   const addQuestions = function (questionsArr, quiz_ID) {
@@ -160,18 +157,8 @@ router.post('/:id/edit', (req, res) => {
   quizArr.push(req.body.title)
 
 
-
-  // for (let q = 1; q <= numOfQuestions; q++) {
-    // questionsArr.push(req.body[`question-${q}`]);
-  //   answersArr.push(req.body[`correct-answer-${q}`]);
-  //   answersArr.push(req.body[`wrong-answer-${q}-2`]);
-  //   answersArr.push(req.body[`wrong-answer-${q}-3`]);
-  //   answersArr.push(req.body[`wrong-answer-${q}-4`]);
-  // }
-  // console.log('quizArr :', quizArr);
-  // console.log('questions Array :', questionsArr);
   console.log('answers Array :', answersArr);
-  // console.log('quiz ID', quizID);
+
 
 
   const addQuestions = function (questionsArr, quiz_ID) {
