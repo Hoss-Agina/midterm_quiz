@@ -10,17 +10,20 @@ const router = express.Router();
 router.get('/', (req, res) => {
   getQuizzes()
   .then((quizzes) => {
-    // console.log("arrOfObjs:", arrOfObjs)
+
     const templateVars = { quizzes };
     console.log("quizzes", quizzes);
     res.render('quizzes_index', templateVars);
   })
   .catch((error) => {console.log(error)})
-
 });
 
+router.get('/new', (req, res) => {
+  console.log("hello")
+  res.render('quizzes_new');
+});
 
-router.get('/:id', (req, res) => {
+router.get('/play/:id', (req, res) => {
   const templateVars = {quizId: req.params.id}
   editPlayQuiz()
 
@@ -30,10 +33,6 @@ router.get('/:id', (req, res) => {
   })
   .catch((error) => {console.log(error)})
 
-});
-
-router.get('/new', (req, res) => {
-  res.render('quizzes_new');
 });
 
 router.post('/new', (req, res) => {
@@ -50,15 +49,7 @@ router.post('/new', (req, res) => {
     numOfQuestions += 1
   }
   numOfQuestions -= 1;
-  // console.log(numOfQuestions);
 
-  //Checking if any of the fields are empty
-  // for (let q = 1; q <= numOfQuestions; q++) {
-  //   if (req.body.title || req.body[`question-${q}`] || req.body[`correct-answer-${q}`] || req.body[`wrong-answer-${q}-2`] || req.body[`wrong-answer-${q}-3`] || req.body[`wrong-answer-${q}-4`]) {
-  //     //send error msg to user to input all fields
-
-  //   }
-  // }
 
   //Creating 3 arrays: quizArr, questionsArr & answersArr to store quiz title, questions & answers entered by user
 
@@ -68,25 +59,15 @@ router.post('/new', (req, res) => {
     answersArray.push(req.body[`wrong-answer-${questionNumber}-2`]);
     answersArray.push(req.body[`wrong-answer-${questionNumber}-3`]);
     answersArray.push(req.body[`wrong-answer-${questionNumber}-4`]);
-    // console.log('answersArray', answersArray);
-    // console.log('questionNumber', questionNumber);
+
     return answersArray;
   }
   quizArr.push(req.body.title)
 
 
 
-  // for (let q = 1; q <= numOfQuestions; q++) {
-    // questionsArr.push(req.body[`question-${q}`]);
-  //   answersArr.push(req.body[`correct-answer-${q}`]);
-  //   answersArr.push(req.body[`wrong-answer-${q}-2`]);
-  //   answersArr.push(req.body[`wrong-answer-${q}-3`]);
-  //   answersArr.push(req.body[`wrong-answer-${q}-4`]);
-  // }
-  // console.log('quizArr :', quizArr);
-  // console.log('questions Array :', questionsArr);
   console.log('answers Array :', answersArr);
-  // console.log('quiz ID', quizID);
+
 
 
   const addQuestions = function (questionsArr, quiz_ID) {

@@ -1,6 +1,5 @@
-const { addUserAnswer } = require('../db/queries/playing');
+// const { addUserAnswer } = require('../db/queries/playing');
 
-console.log("hello");
 $(() => {
   $.get(`/api/quizzes/${quizId}/questions`, function(data) {
 
@@ -41,34 +40,56 @@ $(() => {
 
       // handles shuffling the answers for the user when playing.
       function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
+        console.log('array', array);
+        const copyArray = [...array];
+
+        for (let i = copyArray.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
-            let temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+            let temp = copyArray[i];
+            copyArray[i] = copyArray[j];
+            copyArray[j] = temp;
         }
+        return copyArray;
     }
 
-      shuffleArray(orderedAnswers);
+      const shuffledAnswers = shuffleArray(orderedAnswers);
 
 
       console.log('questionsCounter', questionsCounter);
       $('#questionCont').append(`
     <div id="question${questionsCounter}">
       <h3>${questionsCounter}. ${questionTitle}</h3>
-              <button class="btn btn-secondary" id="check-answer">${orderedAnswers[0]}</button>
-              <button class="btn btn-secondary" id="check-answer">${orderedAnswers[1]}</button>
-              <button class="btn btn-secondary" id="check-answer">${orderedAnswers[2]}</button>
-              <button class="btn btn-secondary" id="check-answer">${orderedAnswers[3]}</button>
+              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[0]}</button>
+              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[1]}</button>
+              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[2]}</button>
+              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[3]}</button>
             </div>
     `);
     }
     let answersArray = [];
 
-    $('#check-answer').on('click', () => {
+    $('.check-answer').on('click', function(event) {
 
-      answersArray.push()
-      addUserAnswer()
+      const counter = $(this).attr('class').split(' ')[3];
+      // console.log('counter', counter);
+
+      for(const answer of data['questions'][`${counter}`]['answers']){
+        if(answer.answer === event.target.textContent)
+      console.log('itworked', answer.answer_id)
+    }
+
+      if(event.target.textContent === data['questions'][`${counter}`]['answers']['0']['answer']){
+        console.log('thats correct');
+      }
+      else{console.log('wrong answer')}
+
+
+      console.log("event", event.target.textContent)
+      console.log("just event", event)
+
+
+      // answersArray.push()
+      // addUserAnswer()
 
   })
   })
