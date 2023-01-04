@@ -14,6 +14,11 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="/styles/playQuiz.css"
+      type="text/css"
+    />
     <script>
        let quizId = <%- JSON.stringify(quizId) %>
     </script>
@@ -29,9 +34,9 @@
     <main style="margin: 1em;">
       <h3>Play Quizzel</h3>
       <div id="error-display"></div>
-      <div class="form-group" id="questionCont">
-      </div>
-      <form class="form" action="/quizzes-api/play/<%= quizId %>" method="GET">
+      <form class="form" id="submit-quiz" action="/quizzes-api/play/<%= quizId %>" method="GET">
+        <div class="form-group" id="questionCont">
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </main>

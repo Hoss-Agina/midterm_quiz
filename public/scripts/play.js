@@ -29,10 +29,12 @@ $(() => {
       titleVar = counterdata;
 
       const questionTitle = data['questions'][`${counterdata}`]['title'];
-      const correctAnswer = data['questions'][`${counterdata}`]['answers']['0']['answer']
-      const wrongAnswer1 = data['questions'][`${counterdata}`]['answers']['1']['answer']
-      const wrongAnswer2 = data['questions'][`${counterdata}`]['answers']['2']['answer']
-      const wrongAnswer3 = data['questions'][`${counterdata}`]['answers']['3']['answer']
+      const correctAnswer = data['questions'][`${counterdata}`]['answers']['0']
+      const wrongAnswer1 = data['questions'][`${counterdata}`]['answers']['1']
+      const wrongAnswer2 = data['questions'][`${counterdata}`]['answers']['2']
+      const wrongAnswer3 = data['questions'][`${counterdata}`]['answers']['3']
+
+      console.log('counter', data['questions'][`${counterdata}`])
 
       const orderedAnswers = [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3]
 
@@ -59,19 +61,44 @@ $(() => {
       $('#questionCont').append(`
     <div id="question${questionsCounter}">
       <h3>${questionsCounter}. ${questionTitle}</h3>
-              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[0]}</button>
-              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[1]}</button>
-              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[2]}</button>
-              <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[3]}</button>
+      <fieldset id="question-${counterdata}">
+      <input class="${counterdata}" type="radio" id="answer-${shuffledAnswers[0].answer_id}" name="${counterdata}" value="${shuffledAnswers[0].answer_id}">
+        <label for="answer-${shuffledAnswers[0].answer_id}">${shuffledAnswers[0].answer}</label><br>
+
+      <input class="${counterdata}" type="radio" id="answer-${shuffledAnswers[1].answer_id}" name="${counterdata}" value="${shuffledAnswers[1].answer_id}">
+        <label for="answer-${shuffledAnswers[1].answer_id}">${shuffledAnswers[1].answer}</label><br>
+
+      <input class="${counterdata}" type="radio" id="answer-${shuffledAnswers[2].answer_id}" name="${counterdata}" value="${shuffledAnswers[2].answer_id}">
+        <label for="answer-${shuffledAnswers[2].answer_id}">${shuffledAnswers[2].answer}</label><br>
+
+      <input class="${counterdata}" type="radio" id="answer-${shuffledAnswers[3].answer_id}" name="${counterdata}" value="${shuffledAnswers[3].answer_id}">
+        <label for="answer-${shuffledAnswers[3].answer_id}">${shuffledAnswers[3].answer}</label><br>
+      </fieldset>
             </div>
     `);
     }
     let answersArray = [];
 
+    // <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[0]}</button>
+    // <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[1]}</button>
+    // <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[2]}</button>
+    // <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[3]}</button>
+
+    $('#submit-quiz').on('submit', function(event){
+
+      event.preventDefault();
+
+      console.log('event', $(this).serializeArray())
+    })
+
     $('.check-answer').on('click', function(event) {
 
       const counter = $(this).attr('class').split(' ')[3];
       // console.log('counter', counter);
+
+
+      // $(this).removeClass('button')
+      // $('check-answer').addClass('hide')
 
       for(const answer of data['questions'][`${counter}`]['answers']){
         if(answer.answer === event.target.textContent)
@@ -79,10 +106,12 @@ $(() => {
     }
 
       if(event.target.textContent === data['questions'][`${counter}`]['answers']['0']['answer']){
-        
+
+
+        $(this).addClass('correct')
         console.log('thats correct');
       }
-      else{console.log('wrong answer')}
+      else{ $(this).addClass('incorrect')}
 
 
       console.log("event", event.target.textContent)
