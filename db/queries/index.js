@@ -3,7 +3,7 @@ const db = require('../connection');
 const getQuizzes = function() {
 
   const quizQuery =
-    `SELECT * FROM quizzes`;
+    `SELECT * FROM quizzes WHERE islisted = true`;
 
   return db
 

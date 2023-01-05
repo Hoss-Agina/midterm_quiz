@@ -3,7 +3,7 @@ const db = require('../connection');
 const addQuiz = function(quizArr) {
 
   const quizQuery =
-    `INSERT INTO quizzes (title) VALUES ($1) RETURNING *;` ;
+    `INSERT INTO quizzes (title, islisted) VALUES ($1, $2) RETURNING *;` ;
 
   return db
 
