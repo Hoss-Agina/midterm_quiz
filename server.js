@@ -7,6 +7,7 @@ const express = require('express');
 const {queryParser} = require ('express-query-parser')
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
+const { getQuizzes } = require('./db/queries/index');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -65,7 +66,14 @@ app.use('/api/quizzes', quizzesApiRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('users');
+  getQuizzes()
+  .then((quizzes) => {
+
+    const templateVars = { quizzes };
+
+    res.render('quizzes_index', templateVars);
+  })
+  .catch((error) => { console.log(error); });
 });
 
 
