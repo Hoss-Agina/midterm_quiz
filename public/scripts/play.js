@@ -3,40 +3,35 @@
 $(() => {
   $.get(`/api/quizzes/${quizId}/questions`, function(data) {
 
-
     console.log('just data', data);
-
-
     // console.log('data', data['questions']['1']['title'])
     // console.log('quiztitle', data['questions']['7']['quiz_title']);
-
 
     const questionData = data['questions'];
 
     let titleVar = 0;
-    for(const counterdata in questionData){
+    for (const counterdata in questionData) {
       titleVar = counterdata;
     }
     let questionsCounter = 0;
     const quizTitle = data['questions'][`${titleVar}`]['quiz_title'];
     // const questionTitle = data['questions']['1']['title'];
-    $('#questionCont').append(`<h2>${quizTitle}</h2>
-    `)
+    $('#questionCont').append(`<h2>${quizTitle}</h2>`);
 
-    for(const counterdata in questionData){
+    for (const counterdata in questionData) {
       console.log('counterdata', counterdata);
       questionsCounter += 1;
       titleVar = counterdata;
 
       const questionTitle = data['questions'][`${counterdata}`]['title'];
-      const correctAnswer = data['questions'][`${counterdata}`]['answers']['0']
-      const wrongAnswer1 = data['questions'][`${counterdata}`]['answers']['1']
-      const wrongAnswer2 = data['questions'][`${counterdata}`]['answers']['2']
-      const wrongAnswer3 = data['questions'][`${counterdata}`]['answers']['3']
+      const correctAnswer = data['questions'][`${counterdata}`]['answers']['0'];
+      const wrongAnswer1 = data['questions'][`${counterdata}`]['answers']['1'];
+      const wrongAnswer2 = data['questions'][`${counterdata}`]['answers']['2'];
+      const wrongAnswer3 = data['questions'][`${counterdata}`]['answers']['3'];
 
-      console.log('counter', data['questions'][`${counterdata}`])
+      console.log('counter', data['questions'][`${counterdata}`]);
 
-      const orderedAnswers = [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3]
+      const orderedAnswers = [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3];
 
       // let randomIndex = Math.floor(Math.random() * 3)
 
@@ -46,16 +41,15 @@ $(() => {
         const copyArray = [...array];
 
         for (let i = copyArray.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            let temp = copyArray[i];
-            copyArray[i] = copyArray[j];
-            copyArray[j] = temp;
+          let j = Math.floor(Math.random() * (i + 1));
+          let temp = copyArray[i];
+          copyArray[i] = copyArray[j];
+          copyArray[j] = temp;
         }
         return copyArray;
-    }
+      }
 
       const shuffledAnswers = shuffleArray(orderedAnswers);
-
 
       console.log('questionsCounter', questionsCounter);
       $('#questionCont').append(`
@@ -84,44 +78,50 @@ $(() => {
     // <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[2]}</button>
     // <button class="btn btn-secondary check-answer ${counterdata}">${shuffledAnswers[3]}</button>
 
-    $('#submit-quiz').on('submit', function(event){
+    // $('#submit-quiz').on('submit', function(event) {
+    //   const answerData = $(this).serializeArray();
+    //   // event.preventDefault();
+    //   const renderResult = function(data) {
+    //     $('#resultCont').append(`
+    //     <h3>Your Score!</h3>
+    //     `);
+    //   };
+    //   console.log('event', answerData);
+    //   $.post(`/quizzes/play/${quizId}/result`, answerData, (respond) => {
+    //     console.log('did this work')
+    //   // window.location.replace(`/quizzes/play/${quizId}/result`)
+    //     // $.get(`/quizzes/play/${quizId}/result`, function(respond) {
+    //     // });
+    //   });
+    // });
 
-      event.preventDefault();
+    // $('.check-answer').on('click', function(event) {
 
-      console.log('event', $(this).serializeArray())
-    })
-
-    $('.check-answer').on('click', function(event) {
-
-      const counter = $(this).attr('class').split(' ')[3];
-      // console.log('counter', counter);
-
+    //   const counter = $(this).attr('class').split(' ')[3];
+    //   // console.log('counter', counter);
 
       // $(this).removeClass('button')
       // $('check-answer').addClass('hide')
 
-      for(const answer of data['questions'][`${counter}`]['answers']){
-        if(answer.answer === event.target.textContent)
-      console.log('itworked', answer.answer_id)
-    }
+      // for (const answer of data['questions'][`${counter}`]['answers']) {
+      //   if (answer.answer === event.target.textContent)
+      //     console.log('itworked', answer.answer_id);
+      // }
 
-      if(event.target.textContent === data['questions'][`${counter}`]['answers']['0']['answer']){
+      // if (event.target.textContent === data['questions'][`${counter}`]['answers']['0']['answer']) {
 
+      //   $(this).addClass('correct');
+      //   console.log('thats correct');
+      // }
+      // else { $(this).addClass('incorrect'); }
 
-        $(this).addClass('correct')
-        console.log('thats correct');
-      }
-      else{ $(this).addClass('incorrect')}
-
-
-      console.log("event", event.target.textContent)
-      console.log("just event", event)
-
+      // console.log("event", event.target.textContent);
+      // console.log("just event", event);
 
       // answersArray.push()
       // addUserAnswer()
 
-  })
+    // });
 
-  })
-})
+  });
+});

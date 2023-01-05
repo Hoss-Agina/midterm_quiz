@@ -4,6 +4,7 @@ require('dotenv').config();
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
+const {queryParser} = require ('express-query-parser')
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 
@@ -25,10 +26,17 @@ app.use(
     isSass: false, // false => scss, true => sass
   })
 );
+app.use(queryParser({
+  parseNull: true,
+  parseUndefined: true,
+  parseBoolean: true,
+  parseNumber: true
+}));
 app.use(express.static('public'));
 app.use(cookieSession({
   name: 'session',
   keys: ["my secret"],
+
 }));
 
 // Separated Routes for each Resource

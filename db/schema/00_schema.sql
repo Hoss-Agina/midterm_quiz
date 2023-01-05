@@ -33,7 +33,6 @@ CREATE TABLE answers (
 CREATE TABLE each_user_answers (
   id SERIAL PRIMARY KEY NOT NULL,
   user_ID INTEGER REFERENCES users1(id) ON DELETE CASCADE,
-  quiz_ID INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
-  score VARCHAR(255) NOT NULL
+  answer_ID INTEGER REFERENCES answers(id) ON DELETE CASCADE,
+  attempt_timestamp TIMESTAMP(0)
 );
-

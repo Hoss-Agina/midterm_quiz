@@ -14,32 +14,19 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="/styles/playQuiz.css"
-      type="text/css"
-    />
     <script>
        let quizId = <%- JSON.stringify(quizId) %>
-
     </script>
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/play.js"></script>
-
     <title>New Quizzel</title>
   </head>
 
   <body>
     <%- include('partials/_header') %>
-
     <main style="margin: 1em;">
-      <h3>Play Quizzel</h3>
       <div id="error-display"></div>
-      <form class="form" id="submit-quiz" action="/quizzes/play/<%=quizId%>/result" method="POST">
-        <div class="form-group" id="questionCont">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+        <div class="form-group" id="resultCont"><h3>Your Score Is <%- score%>/<%- quizLength %>!</h3></div>
     </main>
     <!-- Bootstrap JS
     <script

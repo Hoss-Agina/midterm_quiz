@@ -15,7 +15,7 @@ const editPlayQuiz = function(id) {
     .query(quizQuery)
     .then((result) => {
       // console.log("result rows from edit quiz", result.rows);
-      console.log('quizzes', result);
+      // console.log('quizzes', result);
       const questions = {};
       result.rows.forEach((answer) => {
 
