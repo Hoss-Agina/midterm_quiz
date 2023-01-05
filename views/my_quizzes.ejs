@@ -28,8 +28,8 @@
             <th scope="col">Quizzel ID</th>
             <th scope="col">Quizzel Title</th>
             <th scope="col">Play Quizzel</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -38,8 +38,8 @@
               <td><%= quiz.id %></td>
               <td><%= quiz.title %></td>
               <td><form method="GET" action="/quizzes/play/<%= quiz.id %>"><button type="submit" class="btn btn-warning">Play</button></form></td>
-              <td></td>
-              <td></td>
+              <td><form method="GET" action="/quizzes/<%= quiz.id %>/edit"><button type="submit" class="btn btn-warning">Edit</button></form></td>
+              <td><form method="POST" action="/quizzes/<%= quiz.id %>/delete"><button type="submit" class="btn btn-danger">Delete</button></form></td>
             </tr>
           <% } %>
         </tbody>

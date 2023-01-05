@@ -3,19 +3,20 @@ const express = require('express');
 const db = require('../db/connection');
 const { addQuiz, addQuestion, addAnswer } = require('../db/queries/quizzes_new');
 const { getQuizzes } = require('../db/queries/index');
+const { getQuizzesByUser } = require('../db/queries/index');
 const { deleteQuiz } = require('../db/queries/delete');
 const { editPlayQuiz } = require('../db/queries/edit');
 const { addUserAnswer } = require('../db/queries/playing');
 const { compareAnswers } = require('../db/queries/results');
+const { getUserByLogin } = require('../db/queries/index');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log("hi");
   getQuizzes()
     .then((quizzes) => {
 
       const templateVars = { quizzes };
-
+      console.log('quizzes from INDEX', quizzes);
       res.render('quizzes_index', templateVars);
     })
     .catch((error) => { console.log(error); });
@@ -24,6 +25,19 @@ router.get('/', (req, res) => {
 router.get('/new', (req, res) => {
   // console.log("hello");
   res.render('quizzes_new');
+});
+
+router.get('/myquizzes', (req, res) => {
+  const user = req.session.user_id;
+  getQuizzesByUser([user])
+    .then((quizzes) => {
+      console.log("quizzes passed thru", quizzes);
+      const templateVars = { quizzes };
+
+      res.render('my_quizzes', templateVars);
+    })
+    .catch((error) => { console.log(error); });
+
 });
 
 router.get('/play/:id', (req, res) => {
@@ -119,7 +133,8 @@ router.get('/results', (req, res) => {
 });
 
 router.post('/new', (req, res) => {
-  console.log('the body', req.body);
+  // console.log('the body', req.body);
+  const user = req.session.user_id
   // db.addQuiz({...req.body,owner_ID:user_ID, })
 
   //Counting number of questions users entered into the quiz
@@ -152,9 +167,13 @@ router.post('/new', (req, res) => {
 
     return answersArray;
   };
+  // getUserByLogin([user]).then((username) => {
+  //   const userID = username;
+  // })
   quizArr.push(req.body.title);
   quizArr.push(checkBox);
-  console.log('answers Array :', answersArr);
+  quizArr.push(user);
+  console.log('quiz Array here :', quizArr);
 
 
   const addQuestions = function(questionsArr, quiz_ID) {
@@ -191,6 +210,7 @@ router.post('/new', (req, res) => {
         res.send(error);
       });
   });
+
 });
 
 router.post('/:id/delete', (req, res) => {
@@ -201,12 +221,14 @@ router.post('/:id/delete', (req, res) => {
 });
 
 router.get('/:id/edit', (req, res) => {
+
   const templateVars = { quizId: req.params.id };
+  console.log('TEMPLATEVARS', templateVars);
   res.render('quizzes_edit', templateVars);
 });
 
 router.post('/:id/edit', (req, res) => {
-
+  const user = req.session.user_id
   deleteQuiz(req.params.id);
 
   // console.log(req.body)
@@ -216,6 +238,11 @@ router.post('/:id/edit', (req, res) => {
   let numOfQuestions = 1;
   let quizArr = [];
   let questionsArr = [];
+  let checkBox = true;
+
+  if (req.body.check) {
+    checkBox = false;
+  }
 
   while (req.body[`question-${numOfQuestions}`]) {
     questionsArr.push(req.body[`question-${numOfQuestions}`]);
@@ -245,9 +272,11 @@ router.post('/:id/edit', (req, res) => {
     return answersArray;
   };
   quizArr.push(req.body.title);
+  quizArr.push(checkBox);
+  quizArr.push(user);
 
 
-  console.log('answers Array :', answersArr);
+  // console.log('answers Array :', answersArr);
 
 
 
@@ -291,8 +320,13 @@ router.post('/:id/edit', (req, res) => {
 
   // console.log('quizID', templateVars);
 
-
-
 });
+
+  // res.redirect(`/quizzes/`, templateVars);
+
+  // console.log('quizID', templateVars);
+
+
+
 
 module.exports = router;
