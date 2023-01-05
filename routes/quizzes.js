@@ -10,6 +10,7 @@ const { compareAnswers } = require('../db/queries/results');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  console.log("hi");
   getQuizzes()
     .then((quizzes) => {
 
@@ -289,6 +290,8 @@ router.post('/:id/edit', (req, res) => {
   // res.redirect(`/quizzes/`, templateVars);
 
   // console.log('quizID', templateVars);
+
+
 
 });
 
