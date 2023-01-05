@@ -118,13 +118,20 @@ router.get('/results', (req, res) => {
 });
 
 router.post('/new', (req, res) => {
-  // console.log(req.body)
+  console.log('the body', req.body);
   // db.addQuiz({...req.body,owner_ID:user_ID, })
 
   //Counting number of questions users entered into the quiz
   let numOfQuestions = 1;
   let quizArr = [];
   let questionsArr = [];
+  let checkBox = true;
+
+  if (req.body.check) {
+    checkBox = false;
+  }
+  console.log('checkbox', checkBox);
+
 
   while (req.body[`question-${numOfQuestions}`]) {
     questionsArr.push(req.body[`question-${numOfQuestions}`]);
@@ -145,7 +152,7 @@ router.post('/new', (req, res) => {
     return answersArray;
   };
   quizArr.push(req.body.title);
-
+  quizArr.push(checkBox);
   console.log('answers Array :', answersArr);
 
 
