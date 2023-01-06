@@ -216,7 +216,7 @@ router.post('/new', (req, res) => {
 router.post('/:id/delete', (req, res) => {
   deleteQuiz(req.params.id)
     .then(() => {
-      res.redirect(`/quizzes/`);
+      res.redirect(`/quizzes/myquizzes/`);
     });
 });
 
