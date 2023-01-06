@@ -1,0 +1,74 @@
+body {
+  background: linear-gradient(#ffE031, #F04579);
+}
+
+.bg-success{
+  background-color:midnightblue !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: green;
+}
+
+main {
+  background: linear-gradient(yellow);
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 25em;
+  margin-right: 25em;
+
+}
+
+
+#addremove {
+  display: flex;
+  justify-content:center;
+  width:100%;
+  margin: 1em;
+}
+
+label {
+  display:flex;
+  justify-content:center;
+}
+
+.submitbtn {
+  display:block;
+  width:100%;
+  background-color: midnightblue !important;
+}
+
+#add-question {
+  margin-right:0.5em;
+}
+
+.checkbox
+ {
+  display:flex;
+  justify-content:center;
+ }
+
+.questioncontainer
+{
+  border:solid 5px midnightblue;
+  border-radius: 25px;
+  background: linear-gradient(#ffe53b, #ff005b);
+}
+
+.question
+{
+  background-color:midnightblue;
+  border-radius: 17px 17px 0 0;
+  color: white;
+  padding-bottom: 0.5em;
+}
+
+.form-control-1
+{
+  border:solid 5px #3cb043;
+  border-radius:10px;
+  height: 3em;
+}
+

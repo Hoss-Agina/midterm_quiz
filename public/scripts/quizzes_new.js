@@ -8,7 +8,9 @@ $(() => {
   $('#add-question').on('click', () => {
     questionCounter += 1;
     $('#cont').append(`
-    <div id="question${questionCounter}">
+    <br>
+    <div class="questioncontainer">
+    <div class="question" id="question${questionCounter}">
       <label for="question1">Question ${questionCounter}</label>
               <input
                 class="form-control"
@@ -16,9 +18,10 @@ $(() => {
                 name="question-${questionCounter}"
                 style="width: 300px; margin: 1em"
               />
+              </div>
               <label for="answer1">Answer 1</label>
               <input
-                class="form-control"
+                class="form-control-1"
                 placeholder="Insert Correct Answer"
                 type="text"
                 name="correct-answer-${questionCounter}"

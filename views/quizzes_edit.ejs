@@ -19,6 +19,7 @@
     </script>
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/quizzes_edit.js"></script>
+    <link rel="stylesheet" href="/styles/quizzes_new.css"/>
     <title>New Quizzel</title>
   </head>
 
@@ -32,10 +33,21 @@
       <form class="form" action="/quizzes/<%= quizId %>/edit" method="POST">
         <div class="form-group" id="questionCont">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <label for="private">Make this Quizzel Private?</label>
+        <div class="checkbox">
+          <input
+            type="checkbox"
+            name="check"
+            value="check"
+          />
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary submitbtn">Submit</button>
       </form>
-      <button class="btn btn-secondary" id="add-question">Add Question</button>
-      <button class="btn btn-secondary" id="remove-question">Remove Last Question</button>
+     <div id="addremove">
+        <button class="btn btn-secondary" id="add-question">Add Question</button>
+        <button class="btn btn-secondary" id="remove-question">Remove Last Question</button>
+      </div>
     </main>
     <!-- Bootstrap JS -->
     <!-- <script

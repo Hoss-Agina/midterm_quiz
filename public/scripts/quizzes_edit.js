@@ -43,7 +43,9 @@ $(() => {
 
       console.log('questionsCounter', questionsCounter);
       $('#questionCont').append(`
-    <div id="question${questionsCounter}">
+      <br>
+    <div class="questioncontainer">
+    <div class="question" id="question${questionsCounter}">
       <label for="question1">Question ${questionsCounter}</label>
               <input
                 class="form-control"
@@ -52,9 +54,10 @@ $(() => {
                 name="question-${questionsCounter}"
                 style="width: 300px; margin: 1em"
               />
+              </div>
               <label for="answer1">Answer 1</label>
               <input
-                class="form-control"
+                class="form-control-1"
                 placeholder="Insert Correct Answer"
                 type="text"
                 value="${correctAnswer}"
@@ -96,7 +99,9 @@ $(() => {
 
       questionsCounter += 1;
       $('#questionCont').append(`
-      <div id="question${questionsCounter}">
+      <br>
+      <div class="questioncontainer">
+      <div class="question" id="question${questionsCounter}">
         <label for="question1">Question ${questionsCounter}</label>
                 <input
                   class="form-control"
@@ -104,9 +109,10 @@ $(() => {
                   name="question-${questionsCounter}"
                   style="width: 300px; margin: 1em"
                 />
+                </div>
                 <label for="answer1">Answer 1</label>
                 <input
-                  class="form-control"
+                  class="form-control-1"
                   placeholder="Insert Correct Answer"
                   type="text"
                   name="correct-answer-${questionsCounter}"
