@@ -25,7 +25,8 @@
     </script>
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/play.js"></script>
-    <link rel="stylesheet" href="/styles/quizzes_new.css"/>
+    <link rel="stylesheet" href="/styles/play.css"/>
+    <!-- <link rel="stylesheet" href="/styles/quizzes_new.css"/> -->
 
     <title>New Quizzel</title>
   </head>
@@ -34,12 +35,12 @@
     <%- include('partials/_header') %>
 
     <main style="margin: 1em;">
-      <h3>Play Quizzel</h3>
+      <h2>Play Quizzel</h2>
       <div id="error-display"></div>
       <form class="form" id="submit-quiz" action="/quizzes/play/<%=quizId%>/result" method="POST">
         <div class="form-group" id="questionCont">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary submitbtn">Submit</button>
       </form>
     </main>
     <!-- Bootstrap JS
@@ -58,5 +59,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script> -->
+    </div>
   </body>
 </html>

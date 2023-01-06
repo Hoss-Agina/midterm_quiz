@@ -9,7 +9,7 @@ $(() => {
     questionCounter += 1;
     $('#cont').append(`
     <br>
-    <div class="questioncontainer">
+    <div class="questioncontainer${questionCounter} questioncontainer">
     <div class="question" id="question${questionCounter}">
       <label for="question1">Question ${questionCounter}</label>
               <input
@@ -57,7 +57,7 @@ $(() => {
   });
 
   $('#remove-question').on('click', () => {
-    $(`#question${questionCounter}`).remove();
+    $(`.questioncontainer${questionCounter}`).remove();
     if (questionCounter === 1) {
       return;
     } else {

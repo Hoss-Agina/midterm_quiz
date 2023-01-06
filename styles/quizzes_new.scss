@@ -1,5 +1,7 @@
-body {
+ body {
   background: linear-gradient(#ffE031, #F04579);
+  margin: 0;
+
 }
 
 .bg-success{
@@ -18,9 +20,7 @@ main {
   align-items: center;
   margin-left: 25em;
   margin-right: 25em;
-
 }
-
 
 #addremove {
   display: flex;
@@ -38,6 +38,13 @@ label {
   display:block;
   width:100%;
   background-color: midnightblue !important;
+}
+
+.addbtn{
+
+  display:block;
+  background-color: #712275;
+  color: white !important;
 }
 
 #add-question {

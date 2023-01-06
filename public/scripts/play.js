@@ -16,7 +16,7 @@ $(() => {
     let questionsCounter = 0;
     const quizTitle = data['questions'][`${titleVar}`]['quiz_title'];
     // const questionTitle = data['questions']['1']['title'];
-    $('#questionCont').append(`<h2>${quizTitle}</h2>`);
+    $('#questionCont').append(`<h3>${quizTitle}</h3>`);
 
     for (const counterdata in questionData) {
       console.log('counterdata', counterdata);
@@ -53,11 +53,15 @@ $(() => {
 
       console.log('questionsCounter', questionsCounter);
       $('#questionCont').append(`
+      <div class="questioncontainerplay questioncontainer">
+      <article>
     <div id="question${questionsCounter}">
-      <h3>${questionsCounter}. ${questionTitle}</h3>
+      <h4>${questionsCounter}. ${questionTitle}</h4>
+      </article>
       <fieldset id="question-${counterdata}">
       <input class="${counterdata}" type="radio" id="answer-${shuffledAnswers[0].answer_id}" name="${counterdata}" value="${shuffledAnswers[0].answer_id}">
         <label for="answer-${shuffledAnswers[0].answer_id}">${shuffledAnswers[0].answer}</label><br>
+
 
       <input class="${counterdata}" type="radio" id="answer-${shuffledAnswers[1].answer_id}" name="${counterdata}" value="${shuffledAnswers[1].answer_id}">
         <label for="answer-${shuffledAnswers[1].answer_id}">${shuffledAnswers[1].answer}</label><br>
@@ -69,6 +73,7 @@ $(() => {
         <label for="answer-${shuffledAnswers[3].answer_id}">${shuffledAnswers[3].answer}</label><br>
       </fieldset>
             </div>
+
     `);
     }
     let answersArray = [];

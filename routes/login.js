@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addUser } = require('../db/queries/addUsers');
+const { addUser } = require('../db/queries/addusers');
 
 router.get('/:id', (req, res) => {
   // using encrypted cookies

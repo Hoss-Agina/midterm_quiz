@@ -14,6 +14,7 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/styles/play.css"/>
     <script>
        let quizId = <%- JSON.stringify(quizId) %>
     </script>
@@ -26,7 +27,7 @@
     <%- include('partials/_header') %>
     <main style="margin: 1em;">
       <div id="error-display"></div>
-        <div class="form-group" id="resultCont"><h3>Your Score Is <%- score%>/<%- quizLength %>!</h3></div>
+        <div class="form-group" id="resultCont"><h1>Your Score Is <%- score%>/<%- quizLength %>!</h1></div>
     </main>
     <!-- Bootstrap JS
     <script

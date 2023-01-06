@@ -99,8 +99,9 @@ $(() => {
 
       questionsCounter += 1;
       $('#questionCont').append(`
+
       <br>
-      <div class="questioncontainer">
+      <div class="questioncontainer${questionsCounter} questioncontainer">
       <div class="question" id="question${questionsCounter}">
         <label for="question1">Question ${questionsCounter}</label>
                 <input
@@ -151,7 +152,7 @@ $(() => {
       if (questionsCounter === 1) {
         return;
       } else {
-        $(`#question${questionsCounter}`).remove();
+        $(`.questioncontainer${questionsCounter}`).remove();
         questionsCounter -= 1;
       }
     });
